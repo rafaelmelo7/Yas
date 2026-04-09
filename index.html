@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Para Yas ❤️</title>
+
   <style>
     * { box-sizing: border-box; }
 
@@ -13,7 +14,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Georgia', serif;
+      font-family: Georgia, serif;
       background: linear-gradient(135deg, #fff7fa, #ffe8f0, #fff3f7);
       color: #4a1f2c;
       padding: 24px;
@@ -21,47 +22,31 @@
       position: relative;
     }
 
-    .sparkle,
-    .sparkle::before,
-    .sparkle::after {
-      content: "❤";
+    .floating-heart {
       position: fixed;
-      color: rgba(176, 48, 96, 0.10);
       font-size: 20px;
-      animation: flutuar 8s infinite ease-in-out;
+      opacity: 0.12;
       pointer-events: none;
+      animation: floatHeart 8s ease-in-out infinite;
     }
 
-    .sparkle {
-      top: 10%;
-      left: 8%;
-    }
-
-    .sparkle::before {
-      top: 180px;
-      left: 78vw;
-      animation-delay: 1.5s;
-    }
-
-    .sparkle::after {
-      top: 70vh;
-      left: 14vw;
-      animation-delay: 3s;
-    }
+    .heart1 { top: 10%; left: 8%; }
+    .heart2 { top: 20%; right: 10%; }
+    .heart3 { bottom: 12%; left: 12%; }
+    .heart4 { bottom: 18%; right: 14%; }
 
     .card {
       width: 100%;
       max-width: 760px;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.96);
       border-radius: 28px;
       padding: 32px;
       text-align: center;
       box-shadow: 0 22px 70px rgba(109, 27, 55, 0.14);
+      border: 1px solid rgba(255,255,255,0.7);
+      animation: fadeUp 1s ease;
       position: relative;
       z-index: 1;
-      animation: aparecer 1.2s ease;
-      border: 1px solid rgba(255,255,255,0.7);
-      backdrop-filter: blur(8px);
     }
 
     .top-heart {
@@ -71,19 +56,10 @@
     }
 
     .photo-wrap {
-      position: relative;
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 24px;
       box-shadow: 0 14px 34px rgba(0,0,0,0.10);
-    }
-
-    .photo-wrap::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(60, 15, 30, 0.16), rgba(255,255,255,0.02));
-      pointer-events: none;
     }
 
     img {
@@ -91,33 +67,31 @@
       height: 420px;
       object-fit: cover;
       object-position: 50% 30%;
-      display: block;
-      transform: scale(1.01);
-      transition: transform 0.6s ease;
-    }
-
-    .photo-wrap:hover img {
-      transform: scale(1.04);
     }
 
     h1 {
       font-size: 2.2rem;
-      margin: 0 0 14px;
-      color: #4a1f2c;
+      margin-bottom: 10px;
     }
 
     .subtitle {
-      margin-top: -2px;
-      margin-bottom: 22px;
       font-size: 1rem;
       color: #8b4a62;
       font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #d87aa0, transparent);
+      margin: 20px auto;
     }
 
     p {
-      line-height: 1.9;
-      font-size: 1.12rem;
-      margin: 16px 0;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin: 14px 0;
     }
 
     .highlight {
@@ -125,177 +99,171 @@
       font-weight: bold;
     }
 
-    .divider {
-      width: 82px;
-      height: 2px;
-      background: linear-gradient(to right, transparent, #d87aa0, transparent);
-      margin: 22px auto;
-      border-radius: 999px;
-    }
-
     .btn {
-      margin-top: 22px;
-      padding: 15px 26px;
+      margin-top: 20px;
+      padding: 14px 24px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #c0396b, #d95c89);
+      background: linear-gradient(135deg, #c0396b, #e05686);
       color: white;
       border: none;
-      cursor: pointer;
       font-weight: bold;
-      font-size: 1rem;
-      letter-spacing: 0.2px;
-      box-shadow: 0 14px 28px rgba(192, 57, 107, 0.25);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 18px 34px rgba(192, 57, 107, 0.30);
-    }
-
-    .music-box {
-      margin-top: 22px;
-      padding: 16px 18px;
-      border-radius: 18px;
-      background: #fff6f9;
-      border: 1px solid #f4d7e3;
-    }
-
-    .music-label {
-      margin-bottom: 10px;
-      font-size: 0.96rem;
-      color: #8b4a62;
-    }
-
-    audio {
-      width: 100%;
-      max-width: 360px;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(192, 57, 107, 0.25);
     }
 
     .final {
-      margin-top: 22px;
-      font-style: italic;
-      color: #7c3d56;
-      min-height: 30px;
+      margin-top: 20px;
       opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: 0.4s;
     }
 
     .final.show {
       opacity: 1;
-      transform: translateY(0);
     }
 
-    .assinatura {
-      margin-top: 26px;
-      font-size: 0.95rem;
-      color: #9b6177;
+    .love-box {
+      display: none;
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 16px;
+      background: #fff6f9;
+      border: 1px solid #f4d7e3;
+      position: relative;
     }
 
-    @keyframes aparecer {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    .love-box.show {
+      display: block;
+    }
+
+    .buttons-area {
+      position: relative;
+      height: 100px;
+    }
+
+    .love-btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .yes-btn {
+      background: #c0396b;
+      color: white;
+    }
+
+    .no-btn {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border: 1px solid #f0c2d5;
+    }
+
+    .answer {
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.12); }
+      50% { transform: scale(1.1); }
     }
 
-    @keyframes flutuar {
-      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.10; }
-      50% { transform: translateY(-14px) rotate(8deg); opacity: 0.18; }
+    @keyframes floatHeart {
+      50% { transform: translateY(-12px); }
     }
 
     @media (max-width: 640px) {
-      .card {
-        padding: 22px;
-        border-radius: 22px;
-      }
-
-      img {
-        height: 360px;
-      }
-
-      h1 {
-        font-size: 1.9rem;
-      }
-
-      p {
-        font-size: 1.04rem;
-      }
+      img { height: 360px; }
     }
   </style>
 </head>
+
 <body>
-  <div class="sparkle"></div>
 
-  <div class="card">
-    <div class="top-heart">❤️</div>
+<div class="floating-heart heart1">❤</div>
+<div class="floating-heart heart2">❤</div>
+<div class="floating-heart heart3">❤</div>
+<div class="floating-heart heart4">❤</div>
 
-    <div class="photo-wrap">
-      <img src="Yasmin.jpeg" alt="Yasmin" />
-    </div>
+<div class="card">
 
-    <h1>Para você, Yas ❤️</h1>
-    <div class="subtitle">uma pequena surpresa, feita com carinho</div>
+  <div class="top-heart">❤️</div>
 
-    <div class="divider"></div>
-
-    <p>
-      Eu poderia escrever muitas coisas… mas a verdade é simples:
-      <span class="highlight">você é especial de um jeito que não se explica fácil</span>.
-    </p>
-
-    <p>
-      Tem algo no seu olhar, no seu jeito… que prende atenção, acalma e ao mesmo tempo desperta algo bom.
-      E quanto mais eu te conheço, mais percebo que não é só beleza…
-      são as risadas leves, as conversas soltas, as brincadeiras,
-      a sua presença, a sua energia, <span class="highlight">é quem você é</span>.
-    </p>
-
-    <p>
-      Sou muito grato a Deus por estar vivendo o que estou vivendo com você.
-      Você trouxe algo bonito, leve e verdadeiro para os meus dias.
-    </p>
-
-    <p>
-      E essa página é só uma forma simples de te lembrar que
-      <span class="highlight">eu amo você ❤️</span>.
-    </p>
-
-    <button class="btn" onclick="iniciarSurpresa()">Clique aqui 💌</button>
-
-    <p id="final" class="final"></p>
-
-    <div class="music-box">
-      <div class="music-label">Toque a música e leia com calma 🎵</div>
-      <audio id="musica" loop controls>
-        <source src="musica.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio.
-      </audio>
-    </div>
-    
-    <div class="assinatura">Feito pensando em você</div>
+  <div class="photo-wrap">
+    <img src="Yasmin.jpeg" />
   </div>
 
-  <script>
-    function iniciarSurpresa() {
-      const audio = document.getElementById('musica');
-      const final = document.getElementById('final');
+  <h1>Para você, Yas ❤️</h1>
+  <div class="subtitle">uma pequena surpresa</div>
 
-      audio.play().catch(() => {});
+  <div class="divider"></div>
 
-      final.innerText = "Com carinho, de alguém que agradece a Deus por ter você por perto. ❤️";
-      final.classList.add("show");
-    }
-  </script>
+  <p>
+    Você é especial de um jeito que não se explica fácil.
+  </p>
+
+  <p>
+    Tem algo no seu jeito que prende atenção, acalma e ao mesmo tempo desperta algo bom.
+  </p>
+
+  <p>
+    Sou muito grato a Deus por estar vivendo isso com você.
+  </p>
+
+  <p>
+    <span class="highlight">Eu amo você ❤️</span>
+  </p>
+
+  <button class="btn" onclick="iniciar()">Clique aqui 💌</button>
+
+  <p id="final" class="final"></p>
+
+  <div id="loveBox" class="love-box">
+    <p><strong>Você me ama? 😌</strong></p>
+
+    <div class="buttons-area">
+      <button class="love-btn yes-btn" onclick="sim()">Sim ❤️</button>
+      <button class="love-btn no-btn" id="noBtn">Não 😅</button>
+    </div>
+
+    <div id="answer" class="answer"></div>
+  </div>
+
+</div>
+
+<script>
+function iniciar() {
+  document.getElementById("final").innerText =
+    "Com carinho, de alguém que pensa em você todos os dias ❤️";
+
+  document.getElementById("final").classList.add("show");
+  document.getElementById("loveBox").classList.add("show");
+}
+
+function sim() {
+  document.getElementById("answer").innerText =
+    "Então vem cá que eu quero te ver logo 😏❤️";
+}
+
+const noBtn = document.getElementById("noBtn");
+
+function fugir() {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 60;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+noBtn.addEventListener("mouseenter", fugir);
+noBtn.addEventListener("touchstart", fugir);
+noBtn.addEventListener("click", fugir);
+</script>
+
 </body>
 </html>
